@@ -1,0 +1,12 @@
+{% if FEEDS %}
+    <section>
+        <h1>Feeds</h2>
+        <ul>
+        <li><a href="{{ FEED_ATOM }}" target="_blank">All</a></li>
+
+        {% for category, article in categories %}
+            <li><a href="feeds/{{category}}.atom.xml" target="_blank">{{ category }}</a></li>
+        {% endfor %}
+        </ul>
+    </section>
+{% endif %}

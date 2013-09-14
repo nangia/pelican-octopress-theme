@@ -9,14 +9,21 @@
 {% if SEARCH_BOX %}
 <form action="{{ SITESEARCH|default('http://google.com/search') }}" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:{{ SITEURL|replace('http://','') }}" />
+    <input type="hidden" name="q" value="site:nangia.in" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
 {% endif %}
 
+
 <ul class="main-navigation">
-  <li><a href="{{ SITEURL }}/">Blog</a></li>
+  <li><a href="{{ SITEURL }}/">All</a></li>
+
+  {% if DISPLAY_CATEGORIES_ON_MENU %}
+    {% for category, articles in categories %}
+      <li><a href="{{ SITEURL }}/{{category.url }}">{{ category|capitalize }}</a></li>
+    {% endfor %}
+  {% endif %}
   {% for title, link in MENUITEMS %}
     <li><a href="{{ link }}">{{ title }}</a></li>
   {% endfor %}
@@ -24,6 +31,7 @@
     {% for page in PAGES %}
       <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
     {% endfor %}
-    <!-- TODO: add categories here? -->
   {% endif %}
+
+
 </ul>
